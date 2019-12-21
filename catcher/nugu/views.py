@@ -13,8 +13,7 @@ NUGU_OBJ = json.loads(NUGU_JSON)
 @permission_classes([])
 def location(request):
     response_str = ""
-    #role = request.data['action']['parameters']['name']['value']
-    role = "엄마"
+    role = request.data['action']['parameters']['name']['value']
     if role == "첫째" or role == "둘째":
         response_str = role + "는 서울시 관악구 봉천동 4-1 에 있어!"
     else:
