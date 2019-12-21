@@ -18,8 +18,8 @@ def location(request):
         response_str = role + "는 서울시 관악구 봉천동 4-1 에 있어!"
     else:
         response_str = role + "는 아직 등록 되어있지 않아."
-    import pdb
-    pdb.set_trace()
     NUGU_OBJ['response']['output']['str'] = response_str
     NUGU_FORMAT = json.dumps(NUGU_OBJ)
+    import pdb
+    pdb.set_trace()
     return Response(json.dumps(NUGU_OBJ), status=status.HTTP_200_OK)
