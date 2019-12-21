@@ -27,7 +27,7 @@ def location(request):
 @authentication_classes([])
 @permission_classes([])
 def HeasunFa(request):
-    NUGU_OBJ['response']['directivces'][0]['audioItem']["stream"][
+    NUGU_OBJ['response']['directives'][0]['audioItem']["stream"][
         "url"] = "https://youtu.be/f41VVD6CU2U?t=413"
     print(NUGU_OBJ)
     return JsonResponse(NUGU_OBJ['response'], status=status.HTTP_200_OK)
