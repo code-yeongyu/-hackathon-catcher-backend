@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'imagekit',
     'pilkit',
+    'nugu',
     'drf_yasg',
 ]
 
