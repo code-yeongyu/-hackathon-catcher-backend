@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from family.models import Family
+from imagekit.models import ProcessedImageField
 
 
 class Account(models.Model):
@@ -8,6 +8,14 @@ class Account(models.Model):
                ('3S', '셋째')]
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 on_delete=models.CASCADE)
+    name = models.CharField(max_length=10, default="")
     role = models.CharField(max_length=2, choices=CHOICES, null=True)
-    family = models.ForeignKey(Family, on_delete=models.CASCADE, null=True)
+    family_id = models.IntegerField(null=False, default=-1)
     phone_number = models.CharField(max_length=11, null=True)
+    notifications = models.TextField(
+        default="[]")  # '[{"name":"yeongyu", "family_id":1}]'
+    image = ProcessedImageField(upload_to='media/%Y-%m-%d/',
+                                format='JPEG',
+                                options={'quality': 60},
+                                blank=True,
+                                default="")

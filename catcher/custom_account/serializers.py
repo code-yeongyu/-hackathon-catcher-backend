@@ -7,4 +7,4 @@ class AccountSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Account
-        fields = ("id", "role", "family", "phone_number")
+        fields = ("id", "role", "family_id", "phone_number", "notifications")

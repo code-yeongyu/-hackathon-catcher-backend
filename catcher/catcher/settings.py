@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     'custom_account',
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
+    'imagekit',
+    'pilkit',
+    'drf_yasg',
 ]
 
 REST_FRAMEWORK = {
