@@ -3,7 +3,7 @@ from django.core import serializers
 from django.contrib.auth.models import User
 
 from rest_framework import status, permissions, generics
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
 import drf_yasg.openapi as openapi
