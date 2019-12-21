@@ -1,15 +1,38 @@
 import json
 from django.core import serializers
-
 from django.contrib.auth.models import User
+
+from rest_framework import status, permissions, generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+
+import drf_yasg.openapi as openapi
+from drf_yasg.utils import swagger_auto_schema
+
 from custom_account.models import Account
 
-from rest_framework import status, permissions
-from rest_framework import generics
+INVITE_PARAMS = [
+    openapi.Parameter('username',
+                      openapi.IN_QUERY,
+                      description="username of the user to invite",
+                      type=openapi.TYPE_STRING)
+]
+JOIN_PARAMS = [
+    openapi.Parameter('family_id',
+                      openapi.IN_QUERY,
+                      description="id of the family to join",
+                      type=openapi.TYPE_INTEGER)
+]
 
 
+@swagger_auto_schema(
+    method='post',
+    operation_description="Get members of requested user's current family",
+    responses={
+        200: 'Successfully did requested work',
+        401: 'Unauthorized'
+    },
+    manual_parameters=INVITE_PARAMS)
 @api_view(['POST'])
 def invite(request):
     if request.user.is_authenticated:
@@ -32,6 +55,16 @@ def invite(request):
         return Response(status=status.HTTP_401_UNAUTHORIZED)
 
 
+@swagger_auto_schema(
+    method='post',
+    operation_description="Join a family with the given family id",
+    responses={
+        200: 'Successfully did requested work',
+        400: 'Requested to join a family without permissions',
+        401: 'Unauthorized',
+        406: 'family_id not given to the parameters'
+    },
+    manual_parameters=JOIN_PARAMS)
 @api_view(['POST'])
 def join(request):
     if request.user.is_authenticated:
@@ -51,10 +84,16 @@ def join(request):
         return Response(status=status.HTTP_401_UNAUTHORIZED)
 
 
-@api_view(['POST'])
+@swagger_auto_schema(method='delete',
+                     operation_description=
+                     "Secede requested user from the user's current family",
+                     responses={
+                         200: 'Successfully did requested work',
+                         401: 'Unauthorized'
+                     })
+@api_view(['DELETE'])
 def secede(request):
     if request.user.is_authenticated:
-        family_id = request.POST.get('family_id')
         if family_id == None:
             return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
         account = Account.objects.filter(user=request.user)
@@ -65,6 +104,13 @@ def secede(request):
         return Response(status=status.HTTP_401_UNAUTHORIZED)
 
 
+@swagger_auto_schema(
+    method='get',
+    operation_description="Get members of requested user's current family",
+    responses={
+        200: 'Successfully did requested work',
+        401: 'Unauthorized'
+    })
 @api_view(['get'])
 def members(request):
     if request.user.is_authenticated:
