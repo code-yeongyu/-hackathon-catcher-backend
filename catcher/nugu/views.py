@@ -21,3 +21,13 @@ def location(request):
     NUGU_OBJ['response']['output']['str'] = response_str
     print(NUGU_OBJ)
     return JsonResponse(NUGU_OBJ['response'], status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+@authentication_classes([])
+@permission_classes([])
+def HeasunFa(request):
+    NUGU_OBJ['response']['directivces'][0]['audioItem']["stream"][
+        "url"] = "https://youtu.be/f41VVD6CU2U?t=413"
+    print(NUGU_OBJ)
+    return JsonResponse(NUGU_OBJ['response'], status=status.HTTP_200_OK)
