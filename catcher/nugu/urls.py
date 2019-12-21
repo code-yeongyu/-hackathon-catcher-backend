@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from family import views
+from nugu import views
 
 urlpatterns = [
     url(r'^location$', views.location),
