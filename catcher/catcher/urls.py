@@ -33,9 +33,9 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
+    url(r'^nugu/', include('nugu.urls')),
     url(r'^api/user/', include('custom_account.urls')),
     url(r'^api/family/', include('family.urls')),
-    url(r'^nugu/', include('nugu.urls')),
     # swagger ui
     url(r'^swagger(?P<fm>\.json|\.yaml)$',
         schema_view.without_ui(cache_timeout=0),
