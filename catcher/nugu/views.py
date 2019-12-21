@@ -20,5 +20,6 @@ def location(request):
     else:
         response_str = role + "는 아직 등록 되어있지 않아."
     a = f'"str":"{response_str}"'
+    print(NUGU_JSON_FIRST + a + NUGU_JSON_SECOND)
     return Response(NUGU_JSON_FIRST + a + NUGU_JSON_SECOND,
                     status=status.HTTP_200_OK)
