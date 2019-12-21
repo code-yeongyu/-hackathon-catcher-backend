@@ -10,3 +10,4 @@ from rest_framework.permissions import AllowAny
 def location(request):
     import pdb
     pdb.set_trace()
+    print(request.POST['action']['parameters'])
