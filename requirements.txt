@@ -20,7 +20,7 @@ MarkupSafe==1.1.1
 mccabe==0.6.1
 packaging==19.2
 pilkit==2.0
-Pillow==6.2.1
+Pillow==8.1.1
 pylint==2.4.4
 pyparsing==2.4.5
 pytz==2019.3
